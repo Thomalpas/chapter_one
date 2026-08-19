@@ -29,7 +29,7 @@ println(length(Sys.cpu_info()))
 ncpu = 10
 
 #Flag enables all the workers to start on the project of the current dir
-flag = "--project=~/chapter_one/"
+flag = "--project=~/julia_coding/chapter_one/"
 #flag = "--project=."
 println("Workers run with flag: $(flag)")
 addprocs(ncpu - 1, exeflags=flag)
@@ -132,3 +132,19 @@ df = DataFrame(rep = rep, A = A, M = M, h = h, ω = ω, biomasses = biomasses, l
 file = string("hill_", hill_exponent, "_deterministic_burnin_", first_sim, "_", last_sim, ".arrow")
 
 Arrow.write(file, df)
+
+
+
+
+
+@everywhere begin
+    println("worker ", myid())
+    println("Julia version: ", VERSION)
+    println("project: ", Base.active_project())
+    println("Julia executable: ", Sys.BINDIR)
+end
+
+println("main")
+println("Julia version: ", VERSION)
+println("project: ", Base.active_project())
+println("Julia executable: ", Sys.BINDIR)
