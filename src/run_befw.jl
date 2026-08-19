@@ -25,7 +25,3 @@ params.biorates = no_mortality
 sol = simulate(params, B0, tmax = 100, dt = 0.1)
 
 tidy = tidy_output(params, sol)
-
-using Plots
-
-plot(tidy.t, tidy.B)
