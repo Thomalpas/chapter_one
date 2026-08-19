@@ -1,0 +1,11 @@
+name = "chapter_one"
+uuid = "b4885db9-4a5a-4946-b47c-0668dee21b83"
+version = "0.1.0"
+authors = ["Thomalpas <92929876+Thomalpas@users.noreply.github.com>"]
+
+[deps]
+Plots = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
+stoch_befw = "1db84941-acfe-4a05-ad3b-9c663ee29bd9"
+
+[compat]
+Plots = "1.41.6"
