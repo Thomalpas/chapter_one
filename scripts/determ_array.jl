@@ -132,19 +132,3 @@ df = DataFrame(rep = rep, A = A, M = M, h = h, ω = ω, biomasses = biomasses, l
 file = string("hill_", hill_exponent, "_deterministic_burnin_", first_sim, "_", last_sim, ".arrow")
 
 Arrow.write(file, df)
-
-
-
-
-
-@everywhere begin
-    println("worker ", myid())
-    println("Julia version: ", VERSION)
-    println("project: ", Base.active_project())
-    println("Julia executable: ", Sys.BINDIR)
-end
-
-println("main")
-println("Julia version: ", VERSION)
-println("project: ", Base.active_project())
-println("Julia executable: ", Sys.BINDIR)
