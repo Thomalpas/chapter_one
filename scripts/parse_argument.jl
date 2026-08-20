@@ -13,3 +13,11 @@ elseif script_location == "local"
     println(script_location)
     flag = "--project=~/Documents/julia_coding/chapter_one/" # local machine flag
 end
+
+using Arrow, DataFrames
+
+df = DataFrame(entry = 1)
+
+file = string("../../../../mnt/parscratch/users/bi1tma/test.arrow")
+
+Arrow.write(file, df)
