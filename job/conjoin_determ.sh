@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-#SBATCH --job-name=install_packages
+#SBATCH --job-name=conjoin_burnin
 # Amount of RAM requested per job
 #SBATCH --mem=64G
 

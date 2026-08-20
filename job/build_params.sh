@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-#SBATCH --job-name=install_packages
+#SBATCH --job-name=build_params
 # Amount of RAM requested per job
 #SBATCH --mem=128G
 
