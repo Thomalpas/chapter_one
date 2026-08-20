@@ -1,9 +1,10 @@
 
-parsed = parse(String, ARGS[1])
+
+parsed = ARGS[1]
 
 
 if parsed == "HPC"
     println("parsed == HPC")
 else
-    println(parsed)
+    println("failed parsed")
 end
