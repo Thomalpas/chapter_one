@@ -13,4 +13,4 @@ DIR_SCRIPT=scripts
 
 JULIA=/users/bi1tma/.julia/juliaup/julia-1.12.7+0.x64.linux.gnu/bin/julia
 
-cd ${DIR_ENV} && ${JULIA} --project=${DIR_ENV} ${DIR_ENV}/${DIR_SCRIPT}/parse_argument.jl ${"HPC"}
+cd ${DIR_ENV} && ${JULIA} --project=${DIR_ENV} ${DIR_ENV}/${DIR_SCRIPT}/parse_argument.jl "HPC"
