@@ -19,8 +19,8 @@ println(length(Sys.cpu_info()))
 ncpu = 10
 
 #Flag enables all the workers to start on the project of the current dir
-#flag = "--project=~/julia_coding/chapter_one/" # HPC flag
-flag = "--project=~/Documents/julia_coding/chapter_one/" # local machine flag
+flag = "--project=~/julia_coding/chapter_one/" # HPC flag
+#flag = "--project=~/Documents/julia_coding/chapter_one/" # local machine flag
 #flag = "--project=."
 println("Workers run with flag: $(flag)")
 addprocs(ncpu - 1, exeflags=flag)
