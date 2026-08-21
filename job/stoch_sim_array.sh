@@ -2,7 +2,7 @@
 #
 #SBATCH --job-name=stoch_burnin
 # Set number of iteration
-#SBATCH --array=1-30%30
+#SBATCH --array=31-90%60
 # Amount of RAM requested per job
 #SBATCH --mem=256G
 # Nb of threads requested per job (smp = shared memory)
