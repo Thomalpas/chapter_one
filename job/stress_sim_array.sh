@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-#SBATCH --job-name=stoch_burnin
+#SBATCH --job-name=stress_sim
 # Set number of iteration
 #SBATCH --array=1-90%90
 # Amount of RAM requested per job
@@ -27,4 +27,4 @@ END=$((${STEPSIZE} * ${SLURM_ARRAY_TASK_ID}))
 
 echo "Starting task from ${START} to ${END}"
 
-cd ${DIR_ENV} && ${JULIA} --project=${DIR_ENV} ${DIR_ENV}/${DIR_SCRIPT}/stoch_array.jl ${START} ${END} "HPC"
+cd ${DIR_ENV} && ${JULIA} --project=${DIR_ENV} ${DIR_ENV}/${DIR_SCRIPT}/stress_array.jl ${START} ${END} "HPC"

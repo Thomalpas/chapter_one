@@ -4,7 +4,7 @@ using Distributed, Serialization
 
 first_sim, last_sim = try parse(Int, ARGS[1]), parse(Int, ARGS[2])
 catch
-    1, 90
+    91, 180
 end
 
 try 
@@ -18,9 +18,19 @@ println(length(Sys.cpu_info()))
 #ncpu = maximum([length(Sys.cpu_info()), 15])
 ncpu = 10
 
+script_location = try
+    ARGS[3]
+catch
+    "local"
+end
+
 #Flag enables all the workers to start on the project of the current dir
-flag = "--project=~/julia_coding/chapter_one/" # HPC flag
-#flag = "--project=~/Documents/julia_coding/chapter_one/" # local machine flag
+if script_location == "HPC"
+    flag = "--project=~/julia_coding/chapter_one/" # HPC flag
+elseif script_location == "local"
+flag = "--project=~/Documents/julia_coding/chapter_one/" # local machine flag
+end
+
 #flag = "--project=."
 println("Workers run with flag: $(flag)")
 addprocs(ncpu - 1, exeflags=flag)

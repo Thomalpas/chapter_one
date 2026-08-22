@@ -25,3 +25,4 @@ dat = vcat(dat, dat9)
 dat = vcat(dat, dat10)
 
 Arrow.write("hill_2_deterministic_burnin_combined.arrow", dat)
+
