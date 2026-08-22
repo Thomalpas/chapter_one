@@ -40,7 +40,7 @@ println("Using $(ncpu -1) cores")
 @everywhere using DataFrames, Sobol
 @everywhere using stoch_befw
 @everywhere using StatsBase, Distributions
-@everywhere using ProgressMeter
+@everywhere using ProgressMeter, Arrow
 
 @everywhere include("../src/stress_sim.jl")
 
