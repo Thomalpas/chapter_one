@@ -52,12 +52,10 @@ hill = 2
 
 #for hill in hill_exponent
 
-  burnin_timeseries = try DataFrame(Arrow.Table("./out/hill_$(hill)_mega_stochastic_burnin_combined.arrow"))
+  burnin_timeseries = try DataFrame(Arrow.Table("./out/hill_$(hill)_stochastic_burnin_combined.arrow"))
   catch
-    DataFrame(Arrow.Table("../out/hill_$(hill)_mega_stochastic_burnin_combined.arrow"))
+    DataFrame(Arrow.Table("../out/hill_$(hill)_stochastic_burnin_combined.arrow"))
   end
-
-  burnin_timeseries.:rep
 
   biomasses = Vector{Vector{Float64}}(burnin_timeseries.biomasses)
 
@@ -120,7 +118,7 @@ hill = 2
                                 )
                                 ),
                                 pruned_foodwebs[first_sim:last_sim],
-                          batch_size = 5
+                          batch_size = 50
                           )
 
   println("$(length(sim)) simulations took $(round(timing /60, digits = 2)) minutes to run")
