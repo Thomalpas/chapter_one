@@ -4,7 +4,7 @@ using Distributed, Serialization
 
 first_sim, last_sim = try parse(Int, ARGS[1]), parse(Int, ARGS[2])
 catch
-    1, 90
+    1, 20
 end
 
 try 
@@ -75,7 +75,7 @@ hill = 2
     br = BioRates(fw, d = 0)
     fr = BioenergeticResponse(fw, h = h[i], ω = ω_matrices[i])
     as = AddStochasticity(fw, addstochasticity = true, target = "producers", θ = θ[i], σe = σ[i])
-    s = Stressor(fw, addstressor = true, slope = -0.0001, start = 5000.0)
+    s = Stressor(fw, addstressor = true, slope = -0.0001, start = 6400.0)
     MP = ModelParameters(fw, biorates = br, functional_response = fr, stochasticity = as) #, stressor = s)
     push!(model_params, MP)
 
@@ -98,7 +98,8 @@ hill = 2
   warmup = stress_sim(pm.params, pm.pruned_biomasses;
         tmax = 50
       )
-  println("$(warmup)")
+  
+      println("$(warmup)")
 
   if last_sim > length(pruned_foodwebs)
         global last_sim = length(pruned_foodwebs)
@@ -113,12 +114,12 @@ hill = 2
                           merge(
                                 (rep = p.rep, params = p.params),
                                 stress_sim(p.params, p.pruned_biomasses;
-                                tmax = 15000,
+                                tmax = 16400,
                                 gc_thre = .02
                                 )
                                 ),
                                 pruned_foodwebs[first_sim:last_sim],
-                          batch_size = 50
+                          batch_size = 1
                           )
 
   println("$(length(sim)) simulations took $(round(timing /60, digits = 2)) minutes to run")
@@ -149,6 +150,7 @@ hill = 2
   df = DataFrame(rep = rep, A = A, M = M, h = h, ω = ω, σ = σ, θ = θ, biomasses = biomasses, first_extinction_point = first_extinction_point)
 
   file = string("../../../../mnt/parscratch/users/bi1tma/hill_$(hill)_stress_timeseries", first_sim, "_", last_sim, ".arrow")
+  file = string("./out/hill_$(hill)_stress_timeseries", first_sim, "_", last_sim, ".arrow")
 
   Arrow.write(file, df)
 
