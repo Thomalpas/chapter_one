@@ -76,7 +76,7 @@ hill = 2
     fr = BioenergeticResponse(fw, h = h[i], ω = ω_matrices[i])
     as = AddStochasticity(fw, addstochasticity = true, target = "producers", θ = θ[i], σe = σ[i])
     s = Stressor(fw, addstressor = true, slope = -0.0001, start = 6400.0)
-    MP = ModelParameters(fw, biorates = br, functional_response = fr, stochasticity = as) #, stressor = s)
+    MP = ModelParameters(fw, biorates = br, functional_response = fr, stochasticity = as, stressor = s)
     push!(model_params, MP)
 
   end
@@ -99,7 +99,7 @@ hill = 2
         tmax = 50
       )
   
-      println("$(warmup)")
+  println("$(warmup)")
 
   if last_sim > length(pruned_foodwebs)
         global last_sim = length(pruned_foodwebs)
@@ -149,8 +149,11 @@ hill = 2
 
   df = DataFrame(rep = rep, A = A, M = M, h = h, ω = ω, σ = σ, θ = θ, biomasses = biomasses, first_extinction_point = first_extinction_point)
 
-  file = string("../../../../mnt/parscratch/users/bi1tma/hill_$(hill)_stress_timeseries_", first_sim, "_", last_sim, ".arrow")
-  #file = string("./out/hill_$(hill)_stress_timeseries", first_sim, "_", last_sim, ".arrow")
+  if script_location == "HPC"
+    file = string("../../../../mnt/parscratch/users/bi1tma/hill_$(hill)_stress_timeseries_", first_sim, "_", last_sim, ".arrow")
+  elseif script_location == "local"
+    file = string("./out/hill_$(hill)_stress_timeseries_", first_sim, "_", last_sim, ".arrow")
+  end
 
   Arrow.write(file, df)
 
