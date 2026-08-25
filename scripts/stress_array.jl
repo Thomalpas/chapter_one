@@ -119,7 +119,7 @@ hill = 2
                                 )
                                 ),
                                 pruned_foodwebs[first_sim:last_sim],
-                          batch_size = 1
+                          batch_size = 20
                           )
 
   println("$(length(sim)) simulations took $(round(timing /60, digits = 2)) minutes to run")
@@ -149,8 +149,8 @@ hill = 2
 
   df = DataFrame(rep = rep, A = A, M = M, h = h, ω = ω, σ = σ, θ = θ, biomasses = biomasses, first_extinction_point = first_extinction_point)
 
-  file = string("../../../../mnt/parscratch/users/bi1tma/hill_$(hill)_stress_timeseries", first_sim, "_", last_sim, ".arrow")
-  file = string("./out/hill_$(hill)_stress_timeseries", first_sim, "_", last_sim, ".arrow")
+  file = string("../../../../mnt/parscratch/users/bi1tma/hill_$(hill)_stress_timeseries_", first_sim, "_", last_sim, ".arrow")
+  #file = string("./out/hill_$(hill)_stress_timeseries", first_sim, "_", last_sim, ".arrow")
 
   Arrow.write(file, df)
 
