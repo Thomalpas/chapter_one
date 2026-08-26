@@ -204,3 +204,37 @@ function prune_foodweb(params::ModelParameters, final_biomasses::Vector{Float64}
         end # Here remove_unconnected_consumers has removed all remaining species
     end # No species remain
 end
+
+"""
+Calculates the Dominant Eigenvalue of the Variance-Covariance Matrix (D.E.V.C.M)
+
+A variance-covariance matrix for the timeseries of a 3 species food web is constructed as follows:
+
+S1 = Species 1's timeseries
+S2 = Species 2's timeseries
+S3 = Species 3's timeseries
+
+[ var(S1)      cov(S1, S2)  cov(S1, S3) 
+  cov(S1, S2)  var(S2)      cov(S2, S3) 
+  cov(S1, S3)  cov(S2, S3)  var(S3)     ]
+
+Note: cov(S1, S2) == cov(S2, S1)
+"""
+function DEVCM(timeseries::Matrix{Float64})
+
+    S = size(timeseries, 2)
+
+    mat = zeros(S, S)
+
+    for i in axes(timeseries, 2)
+        for j in axes(timeseries, 2)
+            if i == j
+                mat[i, j] = var(timeseries[:,i])
+            else
+                mat[i, j] = cov(timeseries[:,i], timeseries[:,j])
+            end
+        end
+    end
+
+    maximum(eigvals(mat))
+end

@@ -8,5 +8,6 @@ end
 
 Pkg.add(
 	["Distributed","Serialization", "DataFrames", "Sobol",
-	 "StatsBase", "Distributions", "ProgressMeter", "Arrow"]
+	 "StatsBase", "Distributions", "ProgressMeter", "Arrow",
+	 "LinearAlgebra", "CSV"]
 	)

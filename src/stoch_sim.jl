@@ -1,4 +1,4 @@
-function mega_stoch_sim(params,  B0;
+function stoch_sim(params,  B0;
     tmax = 15000,
     gc_thre = .02)
 

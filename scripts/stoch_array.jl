@@ -4,7 +4,7 @@ using Distributed, Serialization
 
 first_sim, last_sim = try parse(Int, ARGS[1]), parse(Int, ARGS[2])
 catch
-    91, 180
+    11, 20
 end
 
 try 
@@ -94,7 +94,7 @@ end
 pm = sample(pruned_foodwebs)
 println("Running warmup")
 
-warmup = mega_stoch_sim(pm.params, pm.pruned_biomasses;
+warmup = stoch_sim(pm.params, pm.pruned_biomasses;
       tmax = 50
      )
 println("$(warmup)")
@@ -112,13 +112,13 @@ end
 timing = @elapsed sim = @showprogress pmap(p ->
                          merge(
                                (rep = p.rep, params = p.params),
-                               mega_stoch_sim(p.params, p.pruned_biomasses;
+                               stoch_sim(p.params, p.pruned_biomasses;
                                tmax = 15000,
                                gc_thre = .02
                                )
                               ),
                               pruned_foodwebs[first_sim:last_sim],
-                         batch_size = 50
+                         batch_size = 1
                         )
 
 println("$(length(sim)) simulations took $(round(timing /60, digits = 2)) minutes to run")

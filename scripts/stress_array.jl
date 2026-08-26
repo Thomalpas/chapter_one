@@ -119,7 +119,7 @@ hill = 2
                                 )
                                 ),
                                 pruned_foodwebs[first_sim:last_sim],
-                          batch_size = 20
+                          batch_size = 1
                           )
 
   println("$(length(sim)) simulations took $(round(timing /60, digits = 2)) minutes to run")
