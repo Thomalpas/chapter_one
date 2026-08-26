@@ -6,7 +6,7 @@
 using DataFrames, Sobol
 using stoch_befw
 using Arrow, LinearAlgebra
-using CSV
+using CSV, StatsBase
 
 include("../src/utils.jl")
 
@@ -50,6 +50,7 @@ end
 # b) end of simulation. 16400 time steps
 
 hill = 2
+step_length = 150
 
 for win_size in [100, 200, 400]
     for sample_resolution in [1, 2, 4]
@@ -77,8 +78,8 @@ for win_size in [100, 200, 400]
 
         timeseries_vec = []
         for i in [1:1:size(all_stress_timeseries)[1];]
-        println(i)
-        push!(timeseries_vec, reshape(all_stress_timeseries.biomasses[i], 
+
+            push!(timeseries_vec, reshape(all_stress_timeseries.biomasses[i], 
                                     Int64(length(all_stress_timeseries.biomasses[i])/length(all_stress_timeseries.M[i])),
                                     length(all_stress_timeseries.M[i])))
         end
@@ -315,8 +316,8 @@ for win_size in [100, 200, 400]
 
         all_foodwebs
 
-        CSV.write("./out/timeseries_properties/hill_$(hill_exponent)_winsize_$(win_size)_resolution_$(sample_resolution)_timeseries_properties_$(first_sim)_$(last_sim).csv", overall_df)
-        CSV.write("./out/timeseries_properties/hill_$(hill_exponent)_winsize_$(win_size)_resolution_$(sample_resolution)_index_conversion_$(first_sim)_$(last_sim).csv", combined_df)
+        CSV.write("./out/timeseries_properties/hill_$(hill)_winsize_$(win_size)_resolution_$(sample_resolution)_timeseries_properties_$(first_sim)_$(last_sim).csv", overall_df)
+        CSV.write("./out/timeseries_properties/hill_$(hill)_winsize_$(win_size)_resolution_$(sample_resolution)_index_conversion_$(first_sim)_$(last_sim).csv", combined_df)
 
         # Can't save food webs like FoodWeb anymore...
 
@@ -333,7 +334,7 @@ for win_size in [100, 200, 400]
 
         df = DataFrame(realised_foodweb_id = realised_foodweb_id, A = A, M = M)
 
-        Arrow.write("./out/timeseries_properties/hill_$(hill_exponent)_winsize_$(win_size)_resolution_$(sample_resolution)_foodwebs_$(first_sim)_$(last_sim).arrow", df)
+        Arrow.write("./out/timeseries_properties/hill_$(hill)_winsize_$(win_size)_resolution_$(sample_resolution)_foodwebs_$(first_sim)_$(last_sim).arrow", df)
     end
 
 end
