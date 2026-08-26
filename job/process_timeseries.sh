@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-#SBATCH --job-name=stress_sim
+#SBATCH --job-name=process_timeseries
 # Set number of iteration
 #SBATCH --array=1-90%90
 # Amount of RAM requested per job
