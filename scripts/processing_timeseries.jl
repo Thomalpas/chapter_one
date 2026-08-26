@@ -10,6 +10,12 @@ using CSV
 
 include("../src/utils.jl")
 
+script_location = try
+    ARGS[3]
+catch
+    "local"
+end
+
 function find_extinction_points(mat::Matrix{Float64})
     extinction_points = []
     for i in 1:size(mat,2) # each column
@@ -43,6 +49,8 @@ end
 # a) termination (ususally if everything dead)
 # b) end of simulation. 16400 time steps
 
+hill = 2
+
 for win_size in [100, 200, 400]
     for sample_resolution in [1, 2, 4]
 
@@ -55,8 +63,13 @@ for win_size in [100, 200, 400]
         overall_df = DataFrame()
         no_extinctions = []
 
+        if script_location == "HPC"
+            file = string("../../../../mnt/parscratch/users/bi1tma/hill_$(hill)_stress_timeseries_", first_sim, "_", last_sim, ".arrow")
+        elseif script_location == "local"
+            file = string("./out/hill_$(hill)_stress_timeseries_", first_sim, "_", last_sim, ".arrow")
+        end
         
-        all_stress_timeseries = DataFrame(Arrow.Table("./out/hill_$(hill_exponent)_stress_timeseries_$(first_sim)_$(last_sim).arrow"))
+        all_stress_timeseries = DataFrame(Arrow.Table(file))
 
         all_stress_timeseries.M = Vector{Vector{Float64}}(all_stress_timeseries.M)
 
