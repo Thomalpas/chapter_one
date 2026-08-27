@@ -45,9 +45,9 @@ catch
     1, 20
 end
 
-# need a lil catch for my mismatch
+# need a lil catch for my mismatch - we only have 86398 which survived burnin
 if first_sim == 86001
-    last_sim == 86398
+    last_sim = 86398
 end
 
 # timeseries vec contains timeseries from 1 to either 
