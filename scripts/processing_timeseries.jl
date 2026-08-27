@@ -45,6 +45,11 @@ catch
     1, 20
 end
 
+# need a lil catch for my mismatch
+if first_sim == 86001
+    last_sim == 86398
+end
+
 # timeseries vec contains timeseries from 1 to either 
 # a) termination (ususally if everything dead)
 # b) end of simulation. 16400 time steps
