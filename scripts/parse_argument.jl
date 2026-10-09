@@ -6,6 +6,13 @@ catch
     "local"
 end
 
+hill_exponent = try parse(Int, ARGS[2])
+catch
+    2
+end
+
+println("hill_exponent = ", hill_exponent)
+
 if script_location == "HPC"
     println(script_location)
     flag = "--project=~/julia_coding/chapter_one/" # HPC flag
