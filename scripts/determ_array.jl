@@ -28,9 +28,18 @@ println(length(Sys.cpu_info()))
 #ncpu = maximum([length(Sys.cpu_info()), 15])
 ncpu = 10
 
+script_location = try
+    ARGS[3]
+catch
+    "local"
+end
+
 #Flag enables all the workers to start on the project of the current dir
-flag = "--project=~/julia_coding/chapter_one/"
-#flag = "--project=."
+if script_location == "HPC"
+    flag = "--project=~/julia_coding/chapter_one/" # HPC flag
+elseif script_location == "local"
+flag = "--project=~/Documents/julia_coding/chapter_one/" # local machine flag
+end#flag = "--project=."
 println("Workers run with flag: $(flag)")
 addprocs(ncpu - 1, exeflags=flag)
 println("Using $(ncpu -1) cores")
@@ -55,7 +64,10 @@ using Arrow
 @everywhere include("../src/utils.jl")
 
 # Step one, bring in data
-hill_exponent = 2
+hill_exponent = try parse(Int, ARGS[4])
+catch
+    2
+end
 
 p_vec = generate_parameters(n = 10000)
 

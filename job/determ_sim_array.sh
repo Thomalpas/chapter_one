@@ -27,4 +27,4 @@ END=$((${STEPSIZE} * ${SLURM_ARRAY_TASK_ID}))
 
 echo "Starting task from ${START} to ${END}"
 
-cd ${DIR_ENV} && ${JULIA} --project=${DIR_ENV} ${DIR_ENV}/${DIR_SCRIPT}/determ_array.jl ${START} ${END}
+cd ${DIR_ENV} && ${JULIA} --project=${DIR_ENV} ${DIR_ENV}/${DIR_SCRIPT}/determ_array.jl ${START} ${END} "HPC" "1"
